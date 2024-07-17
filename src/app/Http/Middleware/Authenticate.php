@@ -34,6 +34,7 @@ class Authenticate
      * @param  string|null  $guard
      * @return mixed
      */
+
     public function handle($request, Closure $next, $guard = null)
     {
         if ($this->auth->guard($guard)->guest()) {
@@ -44,6 +45,8 @@ class Authenticate
                         ->table('users')
                         ->where('password', $token)
                         ->first();
+                    // $request->merge(['auth_user'=>$check_token]);
+                    
                         // echo($check_token);
 
                     if ($check_token === null) {
@@ -51,6 +54,8 @@ class Authenticate
                         $res['message'] = 'Permission Not Allowed';
                         return response()->json($res, 403);
                     }
+                    $request->attributes->set('user_auth',$check_token);
+                    // dd('dasdasd',$request->get('user_auth'));
                 } else {
                     $res['success'] = false;
                     $res['message'] = 'Not Authorized';

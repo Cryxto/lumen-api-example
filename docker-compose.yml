@@ -34,7 +34,7 @@ services:
     container_name: nginx_api
     hostname: "nginx_api"
     ports:
-      - "80:80"
+      - "810:80"
     volumes:
       - ./src:/var/www/html
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
