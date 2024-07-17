@@ -103,11 +103,11 @@ class PaymentController extends Controller
             $checkItem = [];
 
             foreach ($order_items as $key => $items) {
-                $checkItem[] = (float) $items->product()->first()->price * $items->quantity;
-                $gross_total = (float) $items->product->first()->price * $items->quantity;
+                // $checkItem[] = (float) $items->product()->first()->price * $items->quantity;
+                $gross_total += (float) $items->product->first()->price * $items->quantity;
                 // dd($gross_total);
             }
-            dd($gross_total);
+            // dd($gross_total);
             $payment_prep = [
                 'order_id' => (int)$order_id,
                 'transaction_id' => Str::random(10),
